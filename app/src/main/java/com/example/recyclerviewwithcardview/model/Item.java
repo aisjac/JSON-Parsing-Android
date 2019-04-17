@@ -1,4 +1,4 @@
-package com.example.recyclerviewwithcardview;
+package com.example.recyclerviewwithcardview.model;
 
 public class Item {
     private String date,time,stadium;

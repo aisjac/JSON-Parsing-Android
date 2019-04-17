@@ -1,20 +1,24 @@
-package com.example.recyclerviewwithcardview;
+package com.example.recyclerviewwithcardview.view;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.widget.Adapter;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.recyclerviewwithcardview.adapter.MyAdapter;
+import com.example.recyclerviewwithcardview.R;
+import com.example.recyclerviewwithcardview.model.Item;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,11 +34,14 @@ public class MainActivity extends AppCompatActivity {
     List<Item> listItem;
 
     ProgressDialog progressDialog;
+//    LottieAnimationView lottieAnimationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        lottieAnimationView = findViewById(R.id.animation_view);
 
         recyclerView = findViewById(R.id.recyclerViewId);
         recyclerView.setHasFixedSize(true);
@@ -42,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
 //        recyclerView.setLayoutManager(staggeredGridLayoutManager);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         listItem = new ArrayList<>();
+
 
         loadData();
     }
@@ -52,12 +60,15 @@ public class MainActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading...");
         progressDialog.show();
 
+
+
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
 
                         progressDialog.dismiss();
+//                        lottieAnimationView.cancelAnimation();
 
                         try {
                             JSONObject jsonObject = new JSONObject(response);
